@@ -39,12 +39,12 @@ Tuned both batch-size and learning rate.
 
 * Retrieve the best best hyperparameters from all your training jobs
 
-batch-size: 0.0032505765136462395
-learning rate: 0.0032505765136462395
+The best parameters from the hpo tuning were:
+
+* batch-size: 32
+* learning rate: 0.0032505765136462395
 
 ## Debugging and Profiling
-
-**TODO**: Give an overview of how you performed model debugging and profiling in Sagemaker
 
 I performed training and debugging through the Amazon SageMaker library SMDebug. I added the corresponding calls to the hpo.py (which I extended so that it can also be used for training by configuring a parameter, instead of running the extra train_model.py script). Both the test and train functions set hooks to measure performance during training.
 
@@ -52,15 +52,29 @@ Profiling gives insights for example about memory and CPU usage of the instances
 
 ### Results
 
-I performed training using an ml.m5.2xlarge instance; overall, it took 22 minutes.
-**TODO**: What are the results/insights did you get by profiling/debugging your model?
+I performed training using an ml.m5.2xlarge instance; overall, it took 21 minutes.
+The profiler report is available in the ProfilerReport subdirectory.
 
-**TODO** Remember to provide the profiler html/pdf file in your submission.
+As expected, most of the time was spent for training (around 92%), around 4% for eval and the rest for other tasks running the training job. None of the triggers occured during this training job (e.g., for very low or too high CPU load, IO bottleneck), which is expected as I used a rather powerful machine for training. The mean step duration was around 2 seconds, as the batch size is rather small.
 
 
 ## Model Deployment
-**TODO**: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
 
-**TODO** Remember to provide a screenshot of the deployed active endpoint in Sagemaker.
+I deployed the finished model to a SageMaker endpoint for inference. I used the ml.t2.medium instance type, as it has a rather low cost. Executing a trained model doesn't take much computing resources, especially in our scenario when just testing the deployment and not requiring a massive amount of live inference from multiple clients.
+
+The inference.py script is running on that instance and is using the computed model to make predictions. As can be seen in the script, the endpoint gets a name, e.g., 'pytorch-inference-2023-02-28-21-48-48-586'. 
+
+It is possible to access the endpoint through the Sagemaker SDK. Based on the URL of an image, this can then be sent to the endpoint:
+
+```python
+image_bytes = requests.get(url).content
+response=predictor.predict(image_bytes, initial_args={"ContentType": "image/jpeg"})
+```
+
+It is also possible to retrieve the endpoint through its name. The cloudwatch log allow checking the output of the inference.py script. In this case, it detects the content type of image/jpeg. The request body type is bytearray. According to the logs, the prediction time was 150 ms.
+
+* Screenshots of the deployed endpoint:
+
 ![Screenshot of deployed endpoint](screenshots/endpoint.png)
+![Screenshot of deployed endpoint](screenshots/endpoint-2.png)
 
