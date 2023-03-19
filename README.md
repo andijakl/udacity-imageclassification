@@ -26,11 +26,12 @@ For the hyperparameter tuning, I tested batch size and learning rates in various
 
 * Logs metrics during the training process
 
-	batch-size	lr	TrainingJobName	TrainingJobStatus	FinalObjectiveValue	TrainingStartTime	TrainingEndTime	TrainingElapsedTimeSeconds
-0	"32"	0.003251	pytorch-training-230221-2133-004-5f79cb85	Completed	0.065263	2023-02-21 21:57:49+00:00	2023-02-21 22:02:17+00:00	268.0
-1	"32"	0.001084	pytorch-training-230221-2133-003-c320b9e0	Completed	0.066843	2023-02-21 21:52:33+00:00	2023-02-21 21:57:05+00:00	272.0
-2	"512"	0.096445	pytorch-training-230221-2133-002-70dd903a	Completed	77.830025	2023-02-21 21:44:01+00:00	2023-02-21 21:51:04+00:00	423.0
-3	"512"	0.089827	pytorch-training-230221-2133-001-1143ce62	Completed	61.521866	2023-02-21 21:34:46+00:00	2023-02-21 21:42:14+00:00	448.0
+|	|batch-size	|lr	|TrainingJobName	|TrainingJobStatus	|FinalObjectiveValue	|TrainingStartTime	|TrainingEndTime	|TrainingElapsedTimeSeconds|
+|---|-------|-----------|-------------------------------------------|-----------|-----------|---------------------------|---------------------------|-----|
+|0	|"32"	|0.003251	|pytorch-training-230221-2133-004-5f79cb85	|Completed	|0.065263	|2023-02-21 21:57:49+00:00	|2023-02-21 22:02:17+00:00	|268.0|
+|1	|"32"	|0.001084	|pytorch-training-230221-2133-003-c320b9e0	|Completed	|0.066843	|2023-02-21 21:52:33+00:00	|2023-02-21 21:57:05+00:00	|272.0|
+|2	|"512"	|0.096445	|pytorch-training-230221-2133-002-70dd903a	|Completed	|77.830025	|2023-02-21 21:44:01+00:00	|2023-02-21 21:51:04+00:00	|423.0|
+|3	|"512"	|0.089827	|pytorch-training-230221-2133-001-1143ce62	|Completed	|61.521866	|2023-02-21 21:34:46+00:00	|2023-02-21 21:42:14+00:00	|448.0|
 
 * Tune at least two hyperparameters
 
