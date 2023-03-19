@@ -43,6 +43,14 @@ def create_data_loaders(data, batch_size):
     '''
     pass
 
+# Could be needed, from live class
+# instead of inference script, like in examples
+def model_fn(model_dir):
+    model = Net()
+    with open(os.path.join(model_dir, "model.pth"), "rb" as f: #/opt/ml/model/model.pth
+        model.load_state_dict(torch.load(f))
+    return model
+
 def main(args):
     '''
     TODO: Initialize a model by calling the net function
