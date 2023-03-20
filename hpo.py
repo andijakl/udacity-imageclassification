@@ -268,4 +268,11 @@ if __name__=='__main__':
     
     args=parser.parse_args()
     
+    
+    logger.info("Setup configuration: {}".format(args))
+    logger.info(f"HPO mode: {args.hpo}")
+    logger.info(f"Batch size: {args.batch_size}")
+    logger.info(f"Learning rate: {args.lr}")
+    
+    
     main(args)
